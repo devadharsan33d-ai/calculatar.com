@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "VaultItem": {
+      "title": "Vault Item",
+      "description": "An encrypted file stored in the vault.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["image", "video", "document"] },
+        "encryptedData": { "type": "string", "description": "Base64 encrypted content" },
+        "mimeType": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "name", "type", "encryptedData", "userId"]
+    },
+    "IntruderAlert": {
+      "title": "Intruder Alert",
+      "description": "A capture of an intruder attempting to access the vault.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "photo": { "type": "string", "description": "Base64 image of the intruder" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "photo", "userId"]
+    },
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "User-specific settings like vault PIN.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "vaultPin": { "type": "string" }
+      },
+      "required": ["userId", "vaultPin"]
+    }
+  },
+  "firestore": {
+    "/vault_items/{itemId}": {
+      "schema": "VaultItem",
+      "description": "Encrypted files stored by users."
+    },
+    "/intruder_alerts/{alertId}": {
+      "schema": "IntruderAlert",
+      "description": "Captures of failed PIN attempts."
+    },
+    "/user_settings/{userId}": {
+      "schema": "UserSettings",
+      "description": "User-specific configuration."
+    }
+  }
+}

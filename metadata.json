@@ -1,0 +1,5 @@
+{
+  "name": "Smart Calculator Vault",
+  "description": "A secure calculator vault to hide photos, videos, and documents with AES encryption and intruder detection.",
+  "requestFramePermissions": ["camera"]
+}
